@@ -5,10 +5,10 @@
         <div class="container">
             <!-- Logo START -->
             <a class="navbar-brand" href="{{ url('/') }}">
-                <img class="light-mode-item navbar-brand-item" src="https://hoverbusinessservices.com/images/HBS-Logo.png"
-                    alt="logo">
-                <img class="dark-mode-item navbar-brand-item" src="https://hoverbusinessservices.com/images/HBS-Logo.png"
-                    alt="logo">
+                <img class="light-mode-item navbar-brand-item" src="https://hoverbusinessservices.com/images/hbs-logo.png"
+                    alt="logo" style="height:55px">
+                <img class="dark-mode-item navbar-brand-item" src="https://hoverbusinessservices.com/images/hbs-logo.png"
+                    alt="logo" style="height:55px">
             </a>
             <!-- Logo END -->
 
@@ -26,9 +26,9 @@
             </button>
 
             <!-- Main navbar START -->
-            <div class="navbar-collapse collapse" id="navbarCollapse">
+            <div class="navbar-collapse collapse justify-content-center" id="navbarCollapse">
                 <!-- Nav Search START -->
-                <div class="col-xxl-6">
+                <div class="col-xxl-8">
                     <div class="nav my-3 my-xl-0 px-4 flex-nowrap align-items-center">
                         <div class="nav-item w-100">
                             <form class="rounded position-relative">
@@ -47,7 +47,7 @@
 
                 <!-- Nav category menu END -->
 
-                <ul class="navbar-nav navbar-nav-scroll ms-auto">
+                {{-- <ul class="navbar-nav navbar-nav-scroll ms-auto">
                     @auth
                         <!-- Nav item 1  Support -->
                         <li class="nav-item"><a class="nav-link" href="#">Support</a></li>
@@ -55,7 +55,7 @@
                         <!-- Nav item 2 My learning -->
                         <li class="nav-item"><a class="nav-link" href="#">My Test</a></li>
                     @endauth
-                </ul>
+                </ul> --}}
                 <!-- Nav Main menu END -->
             </div>
             <!-- Main navbar END -->
@@ -197,7 +197,7 @@
                                                     <div class="me-3">
                                                         <div class="avatar avatar-md">
                                                             <img class="avatar-img rounded-circle"
-                                                                src="{{ static_asset('assets/images/avatar/03.jpg') }}"
+                                                                src="{{ static_asset('assets/images/avatar/01.jpg') }}"
                                                                 alt="avatar">
                                                         </div>
                                                     </div>
@@ -318,7 +318,7 @@
                     @else
                         <li class="nav-item dropdown ms-3">
                             <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="login_logout"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: var(--bs-nav-link-hover-color);">
                                 <i class="fas fa-user me-2"></i>
                                 <span class="d-none d-lg-inline-block">Sign In/Up</span>
                             </a>
@@ -385,7 +385,7 @@
                                             <hr> <!-- Divider -->
                                             <!-- Dropdown item -->
                                             <div class="d-flex mb-4 position-relative">
-                                                <img src="{{ static_asset('assets/images/client/uni-logo-01.svg') }}"
+                                                <img src="{{ static_asset('assets/images/avatar/01.jpg') }}"
                                                     class="icon-md" alt="">
                                                 <div class="ms-3">
                                                     <a class="stretched-link h6 mb-0" href="#">American </a>
@@ -395,7 +395,7 @@
                                             <!-- Dropdown item -->
                                             <!-- Dropdown item -->
                                             <div class="d-flex mb-4 position-relative">
-                                                <img src="{{ static_asset('assets/images/client/uni-logo-01.svg') }}"
+                                                <img src="{{ static_asset('assets/images/avatar/01.jpg') }}"
                                                     class="icon-md" alt="">
                                                 <div class="ms-3">
                                                     <a class="stretched-link h6 mb-0" href="#">American </a>
@@ -405,7 +405,7 @@
                                             <!-- Dropdown item -->
                                             <!-- Dropdown item -->
                                             <div class="d-flex mb-4 position-relative">
-                                                <img src="{{ static_asset('assets/images/client/uni-logo-01.svg') }}"
+                                                <img src="{{ static_asset('assets/images/avatar/01.jpg') }}"
                                                     class="icon-md" alt="">
                                                 <div class="ms-3">
                                                     <a class="stretched-link h6 mb-0" href="#">American </a>
@@ -415,7 +415,7 @@
                                             <!-- Dropdown item -->
                                             <!-- Dropdown item -->
                                             <div class="d-flex mb-4 position-relative">
-                                                <img src="{{ static_asset('assets/images/client/uni-logo-01.svg') }}"
+                                                <img src="{{ static_asset('assets/images/avatar/01.jpg') }}"
                                                     class="icon-md" alt="">
                                                 <div class="ms-3">
                                                     <a class="stretched-link h6 mb-0" href="#">American </a>
@@ -425,7 +425,7 @@
                                             <!-- Dropdown item -->
                                             <!-- Dropdown item -->
                                             <div class="d-flex mb-4 position-relative">
-                                                <img src="{{ static_asset('assets/images/client/uni-logo-01.svg') }}"
+                                                <img src="{{ static_asset('assets/images/avatar/01.jpg') }}"
                                                     class="icon-md" alt="">
                                                 <div class="ms-3">
                                                     <a class="stretched-link h6 mb-0" href="#">American </a>
@@ -441,7 +441,7 @@
                                             <hr> <!-- Divider -->
                                             <!-- Dropdown item -->
                                             <div class="d-flex mb-4 position-relative">
-                                                <img src="{{ static_asset('assets/images/client/uni-logo-01.svg') }}"
+                                                <img src="{{ static_asset('assets/images/avatar/01.jpg') }}"
                                                     class="icon-md" alt="">
                                                 <div class="ms-3">
                                                     <a class="stretched-link h6 mb-0" href="#">American </a>
@@ -450,7 +450,7 @@
                                             </div>
                                             <!-- Dropdown item -->
                                             <div class="d-flex mb-4 position-relative">
-                                                <img src="{{ static_asset('assets/images/client/uni-logo-02.svg') }}"
+                                                <img src="{{ static_asset('assets/images/avatar/01.jpg') }}"
                                                     class="icon-md" alt="">
                                                 <div class="ms-3">
                                                     <a class="stretched-link h6 mb-0" href="#">Indiana</a>
@@ -459,7 +459,7 @@
                                             </div>
                                             <!-- Dropdown item -->
                                             <div class="d-flex mb-4 position-relative">
-                                                <img src="{{ static_asset('assets/images/client/uni-logo-03.svg') }}"
+                                                <img src="{{ static_asset('assets/images/avatar/01.jpg') }}"
                                                     class="icon-md" alt="">
                                                 <div class="ms-3">
                                                     <a class="stretched-link h6 mb-0" href="#">College</a>
@@ -468,7 +468,7 @@
                                             </div>
                                             <!-- Dropdown item -->
                                             <div class="d-flex mb-4 position-relative">
-                                                <img src="{{ static_asset('assets/images/client/uni-logo-01.svg') }}"
+                                                <img src="{{ static_asset('assets/images/avatar/01.jpg') }}"
                                                     class="icon-md" alt="">
                                                 <div class="ms-3">
                                                     <a class="stretched-link h6 mb-0" href="#">Andeerson</a>
@@ -477,7 +477,7 @@
                                             </div>
                                             <!-- Dropdown item -->
                                             <div class="d-flex position-relative">
-                                                <img src="{{ static_asset('assets/images/client/uni-logo-04.svg') }}"
+                                                <img src="{{ static_asset('assets/images/avatar/01.jpg') }}"
                                                     class="icon-md" alt="">
                                                 <div class="ms-3">
                                                     <a class="stretched-link h6 mb-0" href="#">University</a>
@@ -543,7 +543,7 @@
                                             <hr> <!-- Divider -->
                                             <!-- Dropdown item -->
                                             <div class="d-flex mb-4 position-relative">
-                                                <img src="{{ static_asset('assets/images/client/uni-logo-01.svg') }}"
+                                                <img src="{{ static_asset('assets/images/avatar/01.jpg') }}"
                                                     class="icon-md" alt="">
                                                 <div class="ms-3">
                                                     <a class="stretched-link h6 mb-0" href="#">American </a>
@@ -553,7 +553,7 @@
                                             <!-- Dropdown item -->
                                             <!-- Dropdown item -->
                                             <div class="d-flex mb-4 position-relative">
-                                                <img src="{{ static_asset('assets/images/client/uni-logo-01.svg') }}"
+                                                <img src="{{ static_asset('assets/images/avatar/01.jpg') }}"
                                                     class="icon-md" alt="">
                                                 <div class="ms-3">
                                                     <a class="stretched-link h6 mb-0" href="#">American </a>
@@ -563,7 +563,7 @@
                                             <!-- Dropdown item -->
                                             <!-- Dropdown item -->
                                             <div class="d-flex mb-4 position-relative">
-                                                <img src="{{ static_asset('assets/images/client/uni-logo-01.svg') }}"
+                                                <img src="{{ static_asset('assets/images/avatar/01.jpg') }}"
                                                     class="icon-md" alt="">
                                                 <div class="ms-3">
                                                     <a class="stretched-link h6 mb-0" href="#">American </a>
@@ -573,7 +573,7 @@
                                             <!-- Dropdown item -->
                                             <!-- Dropdown item -->
                                             <div class="d-flex mb-4 position-relative">
-                                                <img src="{{ static_asset('assets/images/client/uni-logo-01.svg') }}"
+                                                <img src="{{ static_asset('assets/images/avatar/01.jpg') }}"
                                                     class="icon-md" alt="">
                                                 <div class="ms-3">
                                                     <a class="stretched-link h6 mb-0" href="#">American </a>
@@ -583,7 +583,7 @@
                                             <!-- Dropdown item -->
                                             <!-- Dropdown item -->
                                             <div class="d-flex mb-4 position-relative">
-                                                <img src="{{ static_asset('assets/images/client/uni-logo-01.svg') }}"
+                                                <img src="{{ static_asset('assets/images/avatar/01.jpg') }}"
                                                     class="icon-md" alt="">
                                                 <div class="ms-3">
                                                     <a class="stretched-link h6 mb-0" href="#">American </a>
@@ -599,7 +599,7 @@
                                             <hr> <!-- Divider -->
                                             <!-- Dropdown item -->
                                             <div class="d-flex mb-4 position-relative">
-                                                <img src="{{ static_asset('assets/images/client/uni-logo-01.svg') }}"
+                                                <img src="{{ static_asset('assets/images/avatar/01.jpg') }}"
                                                     class="icon-md" alt="">
                                                 <div class="ms-3">
                                                     <a class="stretched-link h6 mb-0" href="#">American </a>
@@ -608,7 +608,7 @@
                                             </div>
                                             <!-- Dropdown item -->
                                             <div class="d-flex mb-4 position-relative">
-                                                <img src="{{ static_asset('assets/images/client/uni-logo-02.svg') }}"
+                                                <img src="{{ static_asset('assets/images/avatar/01.jpg') }}"
                                                     class="icon-md" alt="">
                                                 <div class="ms-3">
                                                     <a class="stretched-link h6 mb-0" href="#">Indiana</a>
@@ -617,7 +617,7 @@
                                             </div>
                                             <!-- Dropdown item -->
                                             <div class="d-flex mb-4 position-relative">
-                                                <img src="{{ static_asset('assets/images/client/uni-logo-03.svg') }}"
+                                                <img src="{{ static_asset('assets/images/avatar/01.jpg') }}"
                                                     class="icon-md" alt="">
                                                 <div class="ms-3">
                                                     <a class="stretched-link h6 mb-0" href="#">College</a>
@@ -626,7 +626,7 @@
                                             </div>
                                             <!-- Dropdown item -->
                                             <div class="d-flex mb-4 position-relative">
-                                                <img src="{{ static_asset('assets/images/client/uni-logo-01.svg') }}"
+                                                <img src="{{ static_asset('assets/images/avatar/01.jpg') }}"
                                                     class="icon-md" alt="">
                                                 <div class="ms-3">
                                                     <a class="stretched-link h6 mb-0" href="#">Andeerson</a>
@@ -635,7 +635,7 @@
                                             </div>
                                             <!-- Dropdown item -->
                                             <div class="d-flex position-relative">
-                                                <img src="{{ static_asset('assets/images/client/uni-logo-04.svg') }}"
+                                                <img src="{{ static_asset('assets/images/avatar/01.jpg') }}"
                                                     class="icon-md" alt="">
                                                 <div class="ms-3">
                                                     <a class="stretched-link h6 mb-0" href="#">University</a>

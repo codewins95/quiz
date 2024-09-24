@@ -2,7 +2,9 @@
 
 namespace Modules\Quiz\App\Http\Controllers;
 
+use App\Exports\QuestionBankExport;
 use App\Http\Controllers\Controller;
+use App\Imports\QuestionBankImport;
 use App\Models\Category;
 use App\Traits\ImageStore;
 use Brian2694\Toastr\Facades\Toastr;
@@ -12,11 +14,13 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 use Modules\Quiz\App\Models\QuestionAnswer;
 use Modules\Quiz\App\Models\QuestionBank;
 use Modules\Quiz\App\Models\QuestionLevel;
 use Modules\Quiz\App\Models\QuestionOption;
 use Modules\Quiz\App\Models\QuestionPapper;
+use PhpParser\Node\Stmt\TryCatch;
 
 class QuestionBankController extends Controller
 {
@@ -126,7 +130,99 @@ class QuestionBankController extends Controller
     }
 
 
+    public function edit($paper_id, $questionID)
+    {
+        $questionID = (int) htmlentities($questionID);
 
+        if ($questionID !== 0) {
+            $questionBank = QuestionBank::find($questionID);
+
+            if ($questionBank) {
+                $totalOptionID   = $questionBank->totalOption;
+                $dbTotalOptionID = QuestionOption::where('questionID', $questionID)
+                    ->where('name', '!=', '')
+                    ->pluck('id', 'name');
+
+                $paper = QuestionPapper::find($paper_id);
+                $levels = QuestionLevel::orderBy('id')->get();
+                $options = QuestionOption::where('questionID', $questionID)->get();
+
+                if ($questionBank->type == 1 || $questionBank->type == 2) {
+                    $answers = QuestionAnswer::where('questionID', $questionID)->pluck('optionID');
+                } elseif ($questionBank->typeNumber == 3) {
+                    $answers = QuestionAnswer::where('questionID', $questionID)->pluck('text');
+                }
+
+                $datas = [
+                    'question_bank'   => $questionBank,
+                    'totalOptionID'   => $totalOptionID,
+                    'dbTotalOptionID' => $dbTotalOptionID,
+                    'levels'          => $levels,
+                    'options'         => $options,
+                    'answers'         => $answers,
+                    'paper'            => $paper
+                ];
+
+                return view('quiz::question_bank.question_edit', $datas);
+            }
+        }
+
+        Toastr::error('Invalid question ID', 'Failed');
+        return redirect()->back();
+    }
+
+
+    public function update(Request $request, $id)
+    {
+
+        $request->validate([
+            'category_id' => 'required|integer',
+            'papper_id' => 'required|integer',
+            'level_id' => 'required|integer',
+            'type' => 'required|integer',
+            'totalOption' => 'required|integer|min:0',
+            'question' => 'nullable|string',
+            'explanation' => 'nullable|string',
+            'hints' => 'nullable|string',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $questionBankData = [
+            'category_id' => $request->category_id,
+            'papper_id' => $request->papper_id,
+            'level_id' => $request->level_id,
+            'question' => $request->question ?: null,
+            'explanation' => $request->explanation ?: null,
+            'hints' => $request->hints ?: null,
+            'type' => $request->type,
+            'totalOption' => $request->totalOption,
+            'update_user_id' => Auth::id(),
+        ];
+
+
+        if ($request->hasFile('photo')) {
+            $questionBankData['upload'] = $this->saveImage($request->file('photo'));
+        }
+
+        try {
+            DB::beginTransaction();
+
+            $question = QuestionBank::findOrFail($id);
+            $question->update($questionBankData);
+
+            $this->handleQuestionOptions($question, $request);
+
+            DB::commit();
+
+            Toastr::success('Question updated successfully', 'Success');
+            return redirect()->route('admin.quiz.question.bank',$request->papper_id);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            DB::rollBack();
+            Toastr::error('Failed to update the question', 'Error');
+            return redirect()->back();
+        }
+    }
 
     private function handleQuestionOptions(QuestionBank $question, Request $request)
     {
@@ -186,157 +282,63 @@ class QuestionBankController extends Controller
         }
     }
 
-
-    // public function edit($paper_id, $bank_id)
+    // private function saveImage($image)
     // {
-    //     $paper = QuestionPapper::find($paper_id);
-    //     $levels = QuestionLevel::all();
-    //     $question = QuestionBank::find($bank_id);
-    //     return view('quiz::question_bank.question_edit', compact('paper', 'levels', 'question'));
+    //     $imageName = time() . '.' . $image->getClientOriginalExtension();
+    //     $image->move(public_path('uploads/questions'), $imageName);
+    //     return 'uploads/questions/' . $imageName;
     // }
-
-    public function edit($paper_id, $questionID)
-    {
-        $questionID = (int) htmlentities($questionID);
-
-        if ($questionID !== 0) {
-            $questionBank = QuestionBank::find($questionID);
-
-            if ($questionBank) {
-                $totalOptionID   = $questionBank->totalOption;
-                $dbTotalOptionID = QuestionOption::where('questionID', $questionID)
-                    ->where('name', '!=', '')
-                    ->pluck('id', 'name');
-                
-                $paper = QuestionPapper::find($paper_id);
-                $levels = QuestionLevel::orderBy('id')->get();
-                $options = QuestionOption::where('questionID', $questionID)->pluck('name', 'id');
-
-                if ($questionBank->type == 1 || $questionBank->type == 2) {
-                    $answers = QuestionAnswer::where('questionID', $questionID)->pluck('optionID');
-                } elseif ($questionBank->typeNumber == 3) {
-                    $answers = QuestionAnswer::where('questionID', $questionID)->pluck('text');
-                }
-                
-                $datas = [
-                    'question_bank'   => $questionBank,
-                    'totalOptionID'   => $totalOptionID,
-                    'dbTotalOptionID' => $dbTotalOptionID,
-                    'levels'          => $levels,
-                    'options'         => $options,
-                    'answers'         => $answers,
-                    'paper'            =>$paper
-                ];
-
-                return view('quiz::question_bank.question_edit', $datas);
-            }
-        }
-
-        Toastr::error('Invalid question ID', 'Failed');
-        return redirect()->back();
-    }
-
-
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'category_id' => 'required|integer',
-            'papper_id' => 'required|integer',
-            'level_id' => 'required|integer',
-            'type' => 'required|integer',
-            'totalOption' => 'required|integer|min:0',
-            'question' => 'nullable|string',
-            'explanation' => 'nullable|string',
-            'hints' => 'nullable|string',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
-        $questionBankData = [
-            'category_id' => $request->category_id,
-            'papper_id' => $request->papper_id,
-            'level_id' => $request->level_id,
-            'question' => $request->question ?: null,
-            'explanation' => $request->explanation ?: null,
-            'hints' => $request->hints ?: null,
-            'type' => $request->type,
-            'totalOption' => $request->totalOption,
-            'update_user_id' => Auth::id(),
-        ];
-
-        if ($request->hasFile('photo')) {
-            $questionBankData['upload'] = $this->saveImage($request->file('photo'));
-        }
-
-        try {
-            DB::beginTransaction();
-
-            $question = QuestionBank::findOrFail($id);
-            $question->update($questionBankData);
-
-            $this->handleQuestionOptionsUpdate($question, $request);
-
-            DB::commit();
-
-            Toastr::success('Question updated successfully', 'Success');
-            return redirect()->route('admin.quiz.question.bank.index');
-        } catch (\Exception $e) {
-            Log::error($e->getMessage());
-            DB::rollBack();
-            Toastr::error('Failed to update the question', 'Error');
-            return redirect()->back();
-        }
-    }
-
-    private function handleQuestionOptionsUpdate(QuestionBank $question, Request $request)
-    {
-        QuestionOption::where('questionID', $question->id)->delete();
-        QuestionAnswer::where('questionID', $question->id)->delete();
-
-        if ($request->type == 1 || $request->type == 2) {
-            foreach ($request->option as $key => $option) {
-                $optionImgKey = 'image' . ($key + 1);
-                $optionImg = $request->hasFile($optionImgKey) ? $this->saveImage($request->file($optionImgKey)) : null;
-
-                $optionData = QuestionOption::create([
-                    'name' => $option,
-                    'img' => $optionImg,
-                    'questionID' => $question->id,
-                ]);
-
-                if (in_array($key + 1, $request->answer)) {
-                    QuestionAnswer::create([
-                        'questionID' => $question->id,
-                        'optionID' => $optionData->id,
-                        'question_type' => $request->type,
-                    ]);
-                }
-            }
-        } elseif ($request->type == 3) {
-            foreach ($request->answer as $answer) {
-                if (empty($answer)) continue;
-
-                QuestionAnswer::create([
-                    'questionID' => $question->id,
-                    'text' => $answer,
-                    'question_type' => $request->type,
-                ]);
-            }
-        }
-    }
-
-    private function saveImage($image)
-    {
-        $imageName = time() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('uploads/questions'), $imageName);
-        return 'uploads/questions/' . $imageName;
-    }
 
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->id;
+        try {
+            $questionBank = QuestionBank::find($id);
+            if (!$questionBank) {
+                Toastr::error('Question Bank not found', 'Error');
+                return redirect()->back();
+            }
+            if ($questionBank->upload) {
+                $this->deleteImage($questionBank->upload);
+            }
+            QuestionAnswer::where('questionID', $id)->delete();
+
+            QuestionOption::where('questionID', $id)->each(function ($option) {
+                if ($option->img) {
+                    $this->deleteImage($option->img);
+                }
+                $option->delete();
+            });
+            $questionBank->delete();
+
+            Toastr::success('Question Bank deleted successfully', 'Success');
+            return redirect()->back();
+        } catch (\Exception $e) {
+            return $e->getMessage();
+            Log::error('Error deleting Question Bank: ' . $e->getMessage());
+            Toastr::error('Error deleting Question Bank', 'Error');
+            return redirect()->back();
+        }
     }
+
+    public function questionBankExport($paper_id, $category_id){    
+        return Excel::download(new QuestionBankExport($paper_id, $category_id), 'QuestionDemoExport.xlsx');
+    }
+
+
+    public function importQuestionBank(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv',
+        ]);
+
+        Excel::import(new QuestionBankImport, $request->file('file'));
+        Toastr::success('Question Bank imported successfully', 'Success');
+        return redirect()->back();
+    }
+
 }

@@ -2,11 +2,11 @@
 @section('meta_title', isset($title) ? $title : 'Question Pappers')
 @section('contant')
     <div class="page-content-wrapper border">
-        <div class="row g-4">
+        <div class="row g-4 d-flex justify-content-center">
             <!-- Left side START -->
-            <div class="col-xl-12">
+            <div class="col-xl-8 ">
 
-                <div class="card shadow">
+                <div class="card shadow row">
 
                     <!-- Card header -->
                     <div class="card-header border-bottom">
@@ -17,7 +17,7 @@
                     <div class="card-body">
                         <form action="{{route('admin.quiz.paper.fiilter')}}" class="row g-4" method="GET">
                             <input type="hidden" name="{{ csrf_token() }}">
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <label class="form-label">Select Category</label>
                                 <select name="categoryId" class="form-select js-choice z-index-9 border-0 bg-light"
                                     aria-label=".form-select-sm" id="categoryId" onchange="updateSubCategory(this)">
@@ -30,7 +30,7 @@
                             </div>
 
                             <!-- Choice item -->
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <label class="form-label">Select Sub Category</label>
                                 <select name="subCategoryId" class="form-select  z-index-9 border-0 bg-light"
                                     aria-label=".form-select-sm" id="subCategoryId">

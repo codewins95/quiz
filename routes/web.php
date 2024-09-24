@@ -2,8 +2,13 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Auth\AdminAuthController;
+use App\Http\Controllers\Auth\StudentAuthController as AuthStudentAuthController;
+use App\Http\Controllers\User\StudentAuthController;
+use App\Http\Controllers\User\StudentDashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Modules\Student\App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,12 +28,32 @@ Route::get('coming-soon', function () {
     return view('errors.coming-soon');
 });
 
-// 8451850397
 
-Auth::routes();
+// Auth::routes();
+
+// Route::get('admin/login', function(){return view('auth.admin_login');});
+// Route::post('student/login', [StudentAuthController::class,'auth'])->name('student.login');
+Route::get('student/dashboard', [StudentDashboardController::class, 'index'])->name('student.dashboard');
+
+// Student Routes
+Route::group([],function () {
+    Route::get('login', [AuthStudentAuthController::class, 'showLoginForm'])->name('student.login');
+    Route::post('login', [AuthStudentAuthController::class, 'login'])->name('student.login.auth');
+    Route::post('logout', [AuthStudentAuthController::class, 'logout'])->name('student.logout');
+});
+
+// Admin Routes
+Route::prefix('admin')->group(function () {
+    Route::get('login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
+    Route::post('login', [AdminAuthController::class, 'login'])->name('admin.login.auth');
+    Route::post('logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+});
+
+
+
 
 Route::middleware('auth','isAdmin')->prefix('admin')->as('admin.')->group(function(){
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::controller(CategoryController::class)->group( function () {
         Route::get('category/all', 'index')->name('category.all');

@@ -1,0 +1,11 @@
+{
+    "name": "PreviousPaper",
+    "alias": "previouspaper",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\PreviousPaper\\App\\Providers\\PreviousPaperServiceProvider"
+    ],
+    "files": []
+}

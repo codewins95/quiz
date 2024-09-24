@@ -1,5 +1,6 @@
 <?php
 
+
 return [
 
     /*
@@ -36,12 +37,20 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'student' => [
+            'driver' => 'session',
+            'provider' => 'students',
+        ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+        'user' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
     ],
-
     /*
     |--------------------------------------------------------------------------
     | User Providers
@@ -63,6 +72,14 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+        'students' => [
+            'driver' => 'eloquent',
+            'model' => Modules\Student\App\Models\Student::class,
         ],
 
         // 'users' => [

@@ -18,11 +18,13 @@
 
                     <div class="card-body">
 
-                        <form action="{{ route('admin.quiz.question.bank.store') }}" class="row g-4" method="POST"
+                        <form action="{{ route('admin.quiz.question.bank.update',$question_bank->id) }}" class="row g-4" method="POST"
                             enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <input type="hidden" name="category_id" value="{{ $paper->category_id }}">
                             <input type="hidden" name="papper_id" value="{{ $paper->id }}">
+                            {{-- <input type="hidden" name="question_id" value="{{ $question_bank->id }}"> --}}
 
                             <div class="col-lg-3">
                                 <label class="form-label">Difficulty Level <span class="text-danger">*</span></label>
@@ -229,7 +231,7 @@
             $('#type').change(function() {
                 $('#in').empty(); // Clear existing options
                 var type = $(this).val();
-                $('#totalOptionDiv').toggle(type != 0); // Show totalOptionDiv if type is not 0
+                $('#totalOptionDiv').toggle(type != 0); 
                 if (type != 0) {
                     $('#totalOption').val(0);
                 }
@@ -282,7 +284,7 @@
             });
 
             // Generate the HTML for form options
-            function formHtmlData(id, type, value = '', checked = '') {
+            function formHtmlData(id, type, value = '', checked = '', optImg ='') {
                 var required = 'required';
                 var html = '';
 
@@ -313,6 +315,12 @@
                             <div class="col-lg-3 col-sm-3">
                                 <input class="form-control" type="file" name="image${id}" id="image${id}">
                             </div>
+                            ${optImg ? `
+                                <div class="col-lg-3 col-sm-3">
+                                    <img src="${optImg}" class="img-fluid" id="image${id}img" alt="Option ${id} Image" style="height: 45px;">
+                                </div>
+                            ` : ''}
+                            
                             <span class="col-lg-3 col-sm-3 control-label text-red" id="anserror${id}">@error('answer1') {{ $message }} @enderror</span>
                         </div>`;
                 }
@@ -331,24 +339,26 @@
                 if ($question_bank->type == 3) {
                     $options = $answers;
                 }
-
+                
                 $i = 0;
             @endphp
 
             @foreach ($options as $optionKey => $optionValue)
+            {{-- @dd($answers); --}}
                 @if (!isset($postData) && $i + 1 > $question_bank->totalOption)
                     @break
                 @endif
 
-                @php $optionKey = @$f == 1 ? $optionKey + 1 : $optionKey; @endphp
+                {{-- @php $optionKey = @$f == 1 ? $optionKey + 1 : $optionKey; @endphp --}}
 
                 <script type="text/javascript">
                     var optID = '{{ $i + 1 }}';
                     var optTypeID = '{{ $question_bank->type }}';
-                    var optVal = '{{ $optionValue }}';
-                    var optAns = '{{ inicompute($answers) && in_array($optionKey, $answers) ? 'checked="checked"' : '' }}';
+                    var optVal = "{{ $optionValue['name'] }}";
+                    var optAns = "{{ inicompute($answers) && in_array($optionValue['id'], $answers) ? 'checked="checked"' : '' }}";
 
-                    $('#in').append(formHtmlData(optID, optTypeID, optVal, optAns));
+                    var optImg = "{{ $optionValue['img']?uploaded_asset($optionValue['img']):'' }}";
+                    $('#in').append(formHtmlData(optID, optTypeID, optVal, optAns,optImg));
                 </script>
                 @php $i++; @endphp
             @endforeach

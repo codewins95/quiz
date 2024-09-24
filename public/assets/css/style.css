@@ -608,7 +608,8 @@ progress {
   font-size: 1.171875rem;
   font-weight: 400;
 }
-
+.bg-gradient-two{background: linear-gradient(0deg, rgba(10, 208, 244, .12) 7.19%, rgba(255, 255, 255, 0) 104.33%);}
+.bg-gradient-one{background: linear-gradient(180deg, rgba(10, 208, 244, .12) 7.19%, rgba(255, 255, 255, 0) 104.33%);}
 .display-1 {
   font-size: calc(1.725rem + 5.7vw);
   font-weight: 700;
@@ -960,7 +961,15 @@ progress {
           flex: 0 0 auto;
   width: 100%;
 }
+.h-100vh{
+  height: 100vh;
+}
 
+.bg-admin-login{
+  background-image: url('../images/pattern/pattern-background-with-artistic.png');
+  background-repeat: repeat;
+  background-position: center;
+}
 .offset-1 {
   margin-left: 8.33333333%;
 }
@@ -4547,7 +4556,8 @@ textarea.form-control-lg {
   padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
   font-size: var(--bs-nav-link-font-size);
   font-weight: var(--bs-nav-link-font-weight);
-  color: var(--bs-nav-link-color);
+  /* color: var(--bs-nav-link-color); */
+  color: #ffffff;
   background: none;
   border: 0;
   -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
@@ -4755,8 +4765,11 @@ textarea.form-control-lg {
   list-style: none;
 }
 .navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
-  color: var(--bs-navbar-active-color);
+  /* color: var(--bs-navbar-active-color); */
+  color: #ffffff;
+  background-color: #000;
 }
+
 .navbar-nav .dropdown-menu {
   position: static;
 }
@@ -4782,7 +4795,10 @@ textarea.form-control-lg {
       -ms-flex-align: center;
           align-items: center;
 }
-
+#navbarCollapse2 {
+  background-color: #EA3338;
+  font-size: 16px;
+}
 .navbar-toggler {
   padding: var(--bs-navbar-toggler-padding-y) var(--bs-navbar-toggler-padding-x);
   font-size: var(--bs-navbar-toggler-font-size);
@@ -20696,8 +20712,8 @@ small,
           transform: translateY(50%);
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  background: rgba(var(--bs-primary-rgb), 0.1);
-  color: var(--bs-primary);
+  background: rgb(234 51 56);/*rgba(var(--bs-primary-rgb), 0.1);*/
+  color: #ffffff;/*var(--bs-primary);*/
   border-radius: 10%;
   width: 52px;
   height: 52px;

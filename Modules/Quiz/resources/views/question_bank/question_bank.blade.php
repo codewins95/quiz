@@ -5,6 +5,28 @@
 
     <div class="page-content-wrapper border">
         <div class="row mb-3">
+            <div class="col-md-12 mb-4">
+                <div class="row">
+                    <div class="col-6 col-md-2">
+                        <a href="{{ route('admin.question.bank.export', ['paper_id'=>$papers->id,'category_id'=>$papers->category_id ]) }}" class="btn btn-sm btn-primary mb-0"> 
+                            <i class="fas fa-file-csv"></i> Export Demo Csv file
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-4 d-flex justify-content-center">
+                        <form action="{{ route('admin.import-question-bank') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="row">
+                                <div class="col-8">
+                                    <input type="file" name="file" id="file" class="form-control" required>
+                                </div>
+                                <div class="col-4">
+                                    <button type="submit"  class="btn btn-sm btn-primary mb-0 p-2"><i class="fas fa-file-export"></i> Import Question Bank</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div> 
+            </div>
             <div class="col-12 d-sm-flex justify-content-between align-items-center">
                 <h1 class="h3 mb-2 mb-sm-0">Question Bank ({{ $papers->name}})</h1>
                 <a href="{{ route('admin.quiz.question.bank.create', $papers->id) }}" class="btn btn-sm btn-primary mb-0"> + Add
@@ -91,7 +113,7 @@
 
 
                 <div class="modal-body">
-                    <form action="{{ route('admin.quiz.level.destroy') }}" method="post">
+                    <form action="{{ route('admin.quiz.question.bank.destroy') }}" method="post">
                         @csrf
                         <div class="text-center">
                             <h4>{{ __('Are you sure to delete ?') }} </h4>

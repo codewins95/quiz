@@ -23,8 +23,8 @@ class QuestionPapperController extends Controller
     public function index()
     {
         $categories = Category::whereNull('parent_id')->get();
-        $papers  =  QuestionPapper::all();
-        return view('quiz::question_paper.index', compact('categories', 'papers'));
+        // $papers  =  QuestionPapper::all();
+        return view('quiz::question_paper.index', compact('categories'));
     }
 
     /**

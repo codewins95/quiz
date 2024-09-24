@@ -34,7 +34,7 @@
                 </li>
 
                 <!-- Menu item 3 -->
-                <li class="nav-item"> <a class="nav-link" href="admin-student-list.html"><i
+                <li class="nav-item"> <a class="nav-link" href="{{route('admin.student.index')}}"><i
                             class="fas fa-user-graduate fa-fw me-2"></i>Students</a></li>
 
                 <!-- Menu item 4 -->
@@ -81,8 +81,7 @@
                     </a>
                     <!-- Submenu -->
                     <ul class="nav collapse flex-column" id="collapseproduct" data-bs-parent="#navbar-sidebar">
-                        <li class="nav-item"> <a class="nav-link" href="sign-up.html">Product</a></li>
-
+                        <li class="nav-item"> <a class="nav-link" href="sign-up.html">Study Materials</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -94,14 +93,25 @@
                     <ul class="nav collapse flex-column" id="collapsereport"
                         data-bs-parent="#navbar-sidebar">
                         <li class="nav-item"> 
-                            <a class="nav-link" href="sign-up.html">Payment History Report</a>
+                            <a class="nav-link" href="">Payment History Report</a>
                         </li>
                         <li class="nav-item"> 
-                            <a class="nav-link" href="sign-up.html">Online Exam Report</a>
+                            <a class="nav-link" href="">Online Exam Report</a>
                         </li>
                         <li class="nav-item"> 
-                            <a class="nav-link" href="sign-up.html">Online Exam Qustion Report</a>
+                            <a class="nav-link" href="">Online Exam Qustion Report</a>
                         </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#collapseprevious" role="button"
+                        aria-expanded="false" aria-controls="collapseprevious">
+                        <i class="bi bi-book fa-fw me-2"></i>Previous Question
+                    </a>
+                    <!-- Submenu -->
+                    <ul class="nav collapse flex-column" id="collapseprevious" data-bs-parent="#navbar-sidebar">
+                        <li class="nav-item"> <a class="nav-link" href="{{route('admin.previouspaper.index')}}">Question paper</a></li>
                     </ul>
                 </li>
 

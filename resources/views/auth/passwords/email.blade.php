@@ -3,20 +3,20 @@
 @section('content')
 
 
-    <section class="p-0 d-flex align-items-center position-relative overflow-hidden">
+    <section class="p-0 d-flex align-items-center position-relative overflow-hidden bg-gradient-two">
 
         <div class="container-fluid">
             <div class="row">
 
                 <!-- Right -->
-                <div class="col-12 col-lg-6 m-auto">
+                <div class="col-12 col-lg-5 m-auto">
                     <div class="row my-5">
-                        <div class="col-sm-10 col-xl-9 m-auto border p-4">
+                        <div class="col-sm-10 col-xl-9 m-auto border p-5 bg-white">
 
                             <!-- Title -->
-                            <span class="mb-0 fs-1">🤔</span>
-                            <h1 class="fs-2">Forgot Password?</h1>
-                            <h5 class="fw-light mb-4">To receive a new password, enter your email address below.</h5>
+                            
+                            <h1 class="fs-2"><span class="mb-0 fs-3">🤔</span> Forgot Password?</h1>
+                            <h5 class="fw-light mb-4 fs-5">To receive a new password, enter your email address below.</h5>
 
                             @if (session('status'))
                                 <div class="alert alert-success" role="alert">

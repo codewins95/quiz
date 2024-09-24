@@ -83,11 +83,11 @@ Footer START -->
                 <div class="row g-2 mt-2">
                     <!-- Google play store button -->
                     <div class="col-6 col-sm-4 col-md-3 col-lg-6">
-                        <a href="#"> <img src="{{static_asset('assets/images/client/google-play.svg')}}" alt=""> </a>
+                        <a href="#"> <img src="{{static_asset('assets/images/about/google-play.svg')}}" alt=""> </a>
                     </div>
                     <!-- App store button -->
                     <div class="col-6 col-sm-4 col-md-3 col-lg-6">
-                        <a href="#"> <img src="{{static_asset('assets/images/client/app-store.svg')}}" alt="app-store"> </a>
+                        <a href="#"> <img src="{{static_asset('assets/images/about/app-store.svg')}}" alt="app-store"> </a>
                     </div>
                 </div> <!-- Row END -->
             </div>

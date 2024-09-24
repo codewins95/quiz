@@ -3,18 +3,18 @@
 @section('content')
 
 
-    <section class="p-0 d-flex align-items-center position-relative overflow-hidden">
+    <section class="p-0 d-flex align-items-center position-relative overflow-hidden bg-gradient-two">
 
         <div class="container-fluid">
             <div class="row">
 
                 <!-- Right -->
-                <div class="col-12 col-lg-6 m-auto">
+                <div class="col-12 col-lg-5 m-auto">
                     <div class="row my-5">
-                        <div class="col-sm-10 col-xl-9 m-auto border p-4">
+                        <div class="col-sm-10 col-xl-9 m-auto border p-5 bg-white">
                             <!-- Title -->
 
-                            <h2><img src="{{ static_asset('assets/images/element/03.svg') }}" class="h-40px mb-2"
+                            <h2><img src="{{ static_asset('assets/images/element/03.svg') }}" class="h-30px mb-2"
                                     alt=""> Sign up for your account!</h2>
                             <p class="lead mb-4">Nice to see you! Please Sign up with your account.</p>
 

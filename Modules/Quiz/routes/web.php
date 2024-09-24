@@ -43,6 +43,10 @@ Route::group(['middleware'=>['auth','isAdmin'],'prefix'=>'admin','as'=>'admin.']
     Route::get('question/bank/{id}',[QuestionBankController::class,'questionBank'])->name('quiz.question.bank');
     Route::get('question/bank/create/{id}',[QuestionBankController::class,'create'])->name('quiz.question.bank.create');
     Route::post('question/bank/store',[QuestionBankController::class,'store'])->name('quiz.question.bank.store');
-    Route::put('question/bank/update/{id}',[QuestionBankController::class,'update'])->name('quiz.question.bank.update');
     Route::get('question/bank/edit/{paper_id}/{question_id}', [QuestionBankController::class, 'edit'])->name('quiz.question.bank.edit');
+    Route::put('question/bank/update/{id}',[QuestionBankController::class,'update'])->name('quiz.question.bank.update');
+    Route::post('question/bank/destroy',[QuestionBankController::class,'destroy'])->name('quiz.question.bank.destroy');
+
+    Route::get('question-bank/export/{paper_id}/{category_id}',[QuestionBankController::class,'questionBankExport'])->name('question.bank.export');
+    Route::post('import-question-bank', [QuestionBankController::class, 'importQuestionBank'])->name('import-question-bank');
 });

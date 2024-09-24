@@ -84,3 +84,15 @@ if(!function_exists('questionCount')){
         return QuestionBank::where('papper_id', $paper_id)->count();
     }
 }
+
+
+if (!function_exists('get_setting')) {
+    function get_setting($key, $default = null)
+    {
+        $settings = Cache::remember('business_settings', 86400, function () {
+            return BusinessSetting::all();
+        });
+        $setting = $settings->where('type', $key)->first();
+        return $setting == null ? $default : $setting->value;
+    }
+}

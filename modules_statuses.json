@@ -1,5 +1,8 @@
 {
     "Blog": true,
     "Quiz": true,
-    "GeneralSettings": true
+    "GeneralSettings": true,
+    "Student": true,
+    "PreviousQuestionPaper": true,
+    "PreviousPaper": true
 }

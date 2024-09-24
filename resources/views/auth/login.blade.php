@@ -3,24 +3,23 @@
 @section('content')
 
 
-    <section class="p-0 d-flex align-items-center position-relative overflow-hidden">
+    <section class="p-0 d-flex align-items-center position-relative overflow-hidden bg-gradient-two">
 
         <div class="container-fluid">
             <div class="row">
 
                 <!-- Right -->
-                <div class="col-12 col-lg-6 m-auto">
+                <div class="col-12 col-lg-5 m-auto">
                     <div class="row my-5">
-                        <div class="col-sm-10 col-xl-9 m-auto border p-5">
+                        <div class="col-sm-10 col-xl-9 m-auto border p-5 bg-white">
                             <!-- Title -->
 
-                            <h1 class="fs-2">Login <span class="mb-0 fs-1 wave-emoji">👋</span></h1>
+                            <h1 class="fs-2">Login <span class="mb-0 fs-3 wave-emoji">👋</span></h1>
                             <p class="lead mb-4">Nice to see you! Please log in with your account.</p>
 
                             <!-- Form START -->
-                            <form method="POST" action="{{ route('login') }}">
+                            <form method="POST" action="{{ route('student.login.auth') }}">
                                 @csrf
-
 
                                 <!-- Email -->
                                 <div class="mb-4">
@@ -111,7 +110,7 @@
 
                             <!-- Sign up link -->
                             <div class="mt-4 text-center">
-                                <span>Don't have an account? <a href="{{ route('register') }}">Signup here</a></span>
+                                <span>Don't have an account? <a href="">Signup here</a></span>
                             </div>
                         </div>
                     </div> <!-- Row END -->

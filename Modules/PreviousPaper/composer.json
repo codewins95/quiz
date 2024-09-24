@@ -1,0 +1,31 @@
+{
+    "name": "nwidart/previouspaper",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\PreviousPaper\\": "",
+            "Modules\\PreviousPaper\\App\\": "app/",
+            "Modules\\PreviousPaper\\Database\\Factories\\": "database/factories/",
+            "Modules\\PreviousPaper\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\PreviousPaper\\Tests\\": "tests/"
+        }
+    }
+}
